@@ -136,3 +136,12 @@ header h1 {
   font-size: 30px;
   right: 0;
 }
+#loader {
+  margin: 0 auto;
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50vh;
+  display: none;
+}

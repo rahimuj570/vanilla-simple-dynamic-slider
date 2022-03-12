@@ -33,13 +33,17 @@ const showSlider = (imgId) => {
   slider.setAttribute("id", "slider");
   slider.innerHTML = `
   <i class="fa-solid fa-circle-arrow-left"></i>
-  <img id="img-slide" src="${imgArr[imgId]}" alt="${imgId}" />
+  <img id="img-slide" src="${imgArr[imgId]}" alt="Image Number ${imgId} is Loading..." />
   <i class="fa-solid fa-circle-arrow-right"></i>`;
   sliderContainer?.appendChild(slider);
 };
 
 // ===== Change Slider Img ======
 let imgNo = 0;
+getElem("loader").style.display = "block";
+setTimeout(() => {
+  getElem("loader").style.display = "none";
+}, 5000);
 setInterval(() => {
   imgNo++;
   if (imgNo < getLocal().length) {
