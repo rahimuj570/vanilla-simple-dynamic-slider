@@ -3,8 +3,17 @@ const getElem = (idClass) => document.getElementById(idClass);
 let i = 0;
 let arr;
 
+// ======== Set Local Storage =====
+const setLocal = (data) => {
+  const stringify = JSON.stringify(data);
+  return localStorage.setItem("slider", stringify);
+};
+
+// ======== get Local Storage =====
+const getLocal = () => JSON.parse(localStorage.getItem("slider"));
+
 // ======= Add More Handler ========
-getElem("addBtn").addEventListener("click", () => {
+getElem("addBtn")?.addEventListener("click", () => {
   const inputContainer = getElem("input-container");
   const input = document.createElement("div");
   input.classList.add("input");
@@ -15,8 +24,35 @@ getElem("addBtn").addEventListener("click", () => {
   getElem("readyBtn").style.display = "inline-block";
 });
 
+// ======= Show Slider ======
+const showSlider = (imgId) => {
+  getElem("slider")?.remove();
+  const imgArr = getLocal();
+  const sliderContainer = getElem("slider-container");
+  const slider = document.createElement("div");
+  slider.setAttribute("id", "slider");
+  slider.innerHTML = `
+  <i class="fa-solid fa-circle-arrow-left"></i>
+  <img id="img-slide" src="${imgArr[imgId]}" alt="${imgId}" />
+  <i class="fa-solid fa-circle-arrow-right"></i>`;
+  sliderContainer?.appendChild(slider);
+};
+
+// ===== Change Slider Img ======
+let imgNo = 0;
+setInterval(() => {
+  imgNo++;
+  if (imgNo < getLocal().length) {
+    console.log(imgNo);
+    showSlider(imgNo);
+  } else {
+    imgNo = 0;
+    showSlider(imgNo);
+  }
+}, 5000);
+
 // ======= Ready Handler ========
-getElem("readyBtn").addEventListener("click", () => {
+getElem("readyBtn")?.addEventListener("click", () => {
   let errorId = 0;
   arr = [];
   const inputs = document.getElementsByClassName("input-url");
@@ -44,12 +80,3 @@ const deleteInput = (event) => {
     getElem("readyBtn").style.display = "none";
   }
 };
-
-// ======== Set Local Storage =====
-const setLocal = (data) => {
-  const stringify = JSON.stringify(data);
-  return localStorage.setItem("slider", stringify);
-};
-
-// ======== get Local Storage =====
-const getLocal = () => JSON.parse(localStorage.getItem("slider"));
