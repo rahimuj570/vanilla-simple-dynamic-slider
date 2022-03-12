@@ -1,6 +1,6 @@
 const getElem = (idClass) => document.getElementById(idClass);
 let i = 0;
-let arr = [];
+let arr;
 
 // ======= Add More Handler ========
 getElem("addBtn").addEventListener("click", () => {
@@ -18,5 +18,14 @@ getElem("readyBtn").addEventListener("click", () => {
   for (const input of inputs) {
     arr.push(`${input.value}`);
   }
-  console.log(arr);
+  setLocal(arr);
 });
+
+// ======== Set Loacl Storage =====
+const setLocal = (data) => {
+  const stringify = JSON.stringify(data);
+  return localStorage.setItem("slider", stringify);
+};
+
+// ======== get Loacl Storage =====
+const getLocal = () => localStorage.getItem("slider");
