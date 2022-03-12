@@ -52,4 +52,4 @@ const setLocal = (data) => {
 };
 
 // ======== get Local Storage =====
-const getLocal = () => localStorage.getItem("slider");
+const getLocal = () => JSON.parse(localStorage.getItem("slider"));

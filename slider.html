@@ -12,12 +12,20 @@
       <h1>Simple Slider</h1>
     </header>
     <main>
-      <div id="inputs">
-        <input type="text" />
+      <button id="backBtn" onclick="history.back()" id="addBtn">
+        <i
+          style="transform: rotate(180deg)"
+          class="fa-solid fa-arrow-right-to-bracket"
+        ></i>
+        Back To Home
+      </button>
+      <div id="slider-container">
+        <i class="fa-solid fa-circle-arrow-left"></i>
+        <img src="./img/slider (1).jpg" alt="" />
+        <i class="fa-solid fa-circle-arrow-right"></i>
       </div>
-      <button id="addBtn">Add One More</button>
-      <button id="readyBtn">Ready for Slider</button>
     </main>
+    <script src="https://kit.fontawesome.com/fa8c3d741e.js"></script>
     <script src="./slider.js"></script>
   </body>
 </html>
