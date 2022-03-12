@@ -9,10 +9,10 @@ getElem("addBtn").addEventListener("click", () => {
   const input = document.createElement("div");
   input.classList.add("input");
   input.innerHTML = `
-  <input class="input-url" placeholder="URL of ${++i} number Image" type="text" />
+  <input class="input-url" placeholder="URL of Number ${++i} Image" type="text" />
   <button onclick="clearInput(event)" id="clear-btn" title="Clear">X</button><i onclick="deleteInput(event)" id="delete-btn" title="Delete" class="fa-solid fa-trash-can"></i>`;
-  // input.setAttribute("placeholder", `URL of ${++i} number image`);
   inputContainer.appendChild(input);
+  getElem("readyBtn").style.display = "inline-block";
 });
 
 // ======= Ready Handler ========
@@ -26,7 +26,7 @@ getElem("readyBtn").addEventListener("click", () => {
       arr.push(`${input.value}`);
       location = "slider.html";
     } else {
-      alert(`Please Input URl of ${errorId} Number Image or Remove It.`);
+      alert(`Please Input URl of Number ${errorId} Image or Remove The Field.`);
     }
   }
   setLocal(arr);
@@ -39,7 +39,10 @@ const clearInput = (event) => {
 
 // ======= Clear Input Handler ======
 const deleteInput = (event) => {
-  console.log(event.target.parentNode.remove());
+  event.target.parentNode.remove();
+  if (!document.querySelector(".input-url")) {
+    getElem("readyBtn").style.display = "none";
+  }
 };
 
 // ======== Set Local Storage =====

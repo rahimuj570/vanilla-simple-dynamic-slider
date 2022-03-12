@@ -91,9 +91,13 @@ header h1 {
   background: rgb(22, 139, 22);
 }
 .buttons :nth-child(2) {
+  display: none;
   color: #fff;
   background: rgb(22, 162, 255);
 }
 .buttons :nth-child(2):hover {
   background: rgb(14, 119, 189);
 }
+/* #readyBtn{
+
+} */
