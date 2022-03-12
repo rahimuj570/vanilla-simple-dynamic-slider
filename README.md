@@ -1,0 +1,1 @@
+"# vanilla-simple-dynamic-slider" 
