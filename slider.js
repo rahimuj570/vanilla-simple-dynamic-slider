@@ -1,13 +1,17 @@
+// ===== Global Var and Func ======
 const getElem = (idClass) => document.getElementById(idClass);
 let i = 0;
 let arr;
 
 // ======= Add More Handler ========
 getElem("addBtn").addEventListener("click", () => {
-  const inputContainer = getElem("inputs");
-  const input = document.createElement("input");
-  input.classList.add("input-url");
-  //   input.setAttribute("id", `id-${i++}`);
+  const inputContainer = getElem("input-container");
+  const input = document.createElement("div");
+  input.classList.add("input");
+  input.innerHTML = `
+  <input placeholder="URL of ${++i} number Image" type="text" />
+  <button onclick="clearInput(event)" id="clear-btn" title="Clear">X</button><i onclick="deleteInput(event)" id="delete-btn" title="Delete" class="fa-solid fa-trash-can"></i>`;
+  // input.setAttribute("placeholder", `URL of ${++i} number image`);
   inputContainer.appendChild(input);
 });
 
@@ -21,11 +25,21 @@ getElem("readyBtn").addEventListener("click", () => {
   setLocal(arr);
 });
 
-// ======== Set Loacl Storage =====
+// ======= Clear Input Handler ======
+const clearInput = (event) => {
+  event.target.parentNode.firstElementChild.value = "";
+};
+
+// ======= Clear Input Handler ======
+const deleteInput = (event) => {
+  console.log(event.target.parentNode.remove());
+};
+
+// ======== Set Local Storage =====
 const setLocal = (data) => {
   const stringify = JSON.stringify(data);
   return localStorage.setItem("slider", stringify);
 };
 
-// ======== get Loacl Storage =====
+// ======== get Local Storage =====
 const getLocal = () => localStorage.getItem("slider");
