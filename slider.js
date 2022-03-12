@@ -9,7 +9,7 @@ getElem("addBtn").addEventListener("click", () => {
   const input = document.createElement("div");
   input.classList.add("input");
   input.innerHTML = `
-  <input placeholder="URL of ${++i} number Image" type="text" />
+  <input class="input-url" placeholder="URL of ${++i} number Image" type="text" />
   <button onclick="clearInput(event)" id="clear-btn" title="Clear">X</button><i onclick="deleteInput(event)" id="delete-btn" title="Delete" class="fa-solid fa-trash-can"></i>`;
   // input.setAttribute("placeholder", `URL of ${++i} number image`);
   inputContainer.appendChild(input);
@@ -17,10 +17,17 @@ getElem("addBtn").addEventListener("click", () => {
 
 // ======= Ready Handler ========
 getElem("readyBtn").addEventListener("click", () => {
+  let errorId = 0;
   arr = [];
   const inputs = document.getElementsByClassName("input-url");
   for (const input of inputs) {
-    arr.push(`${input.value}`);
+    errorId++;
+    if (input.value) {
+      arr.push(`${input.value}`);
+      location = "slider.html";
+    } else {
+      alert(`Please Input URl of ${errorId} Number Image or Remove It.`);
+    }
   }
   setLocal(arr);
 });
