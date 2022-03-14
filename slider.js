@@ -6,6 +6,7 @@ let arr;
 // ======= Clear Input Handler ======
 const clearInput = (event) => {
   event.target.parentNode.firstElementChild.value = "";
+  event.target.parentNode.firstElementChild.focus();
 };
 
 // ======= Clear Input Handler ======
@@ -66,9 +67,8 @@ const showSlider = (imgId) => {
     const slider = document.createElement("div");
     slider.setAttribute("id", "slider");
     slider.innerHTML = `
-  <i class="fa-solid fa-circle-arrow-left"></i>
-  <img id="img-slide" src="${imgArr[imgId]}" alt="Image Number ${imgId} is Loading..." />
-  <i class="fa-solid fa-circle-arrow-right"></i>`;
+  <img id="img-slide" src="${imgArr[imgId]}" alt="Image Number ${imgId} is not fetched. \n Please Wait for Loading..." />
+ `;
     sliderContainer?.appendChild(slider);
   }
 };
