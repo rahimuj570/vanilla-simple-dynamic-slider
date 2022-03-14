@@ -1,7 +1,17 @@
 // ===== Global Var and Func ======
 const getElem = (idClass) => document.getElementById(idClass);
-let i = 0;
+let i = 3;
 let arr;
+
+// ======= Clear Input Handler ======
+const clearInput = (event) => {
+  event.target.parentNode.firstElementChild.value = "";
+};
+
+// ======= Clear Input Handler ======
+const deleteInput = (event) => {
+  event.target.parentNode.remove();
+};
 
 // ======== Set Local Storage =====
 const setLocal = (data) => {
@@ -21,39 +31,7 @@ getElem("addBtn")?.addEventListener("click", () => {
   <input class="input-url" placeholder="URL of Number ${++i} Image" type="text" />
   <button onclick="clearInput(event)" id="clear-btn" title="Clear">X</button><i onclick="deleteInput(event)" id="delete-btn" title="Delete" class="fa-solid fa-trash-can"></i>`;
   inputContainer.appendChild(input);
-  getElem("readyBtn").style.display = "inline-block";
 });
-
-// ======= Show Slider ======
-const showSlider = (imgId) => {
-  getElem("slider")?.remove();
-  const imgArr = getLocal();
-  const sliderContainer = getElem("slider-container");
-  const slider = document.createElement("div");
-  slider.setAttribute("id", "slider");
-  slider.innerHTML = `
-  <i class="fa-solid fa-circle-arrow-left"></i>
-  <img id="img-slide" src="${imgArr[imgId]}" alt="Image Number ${imgId} is Loading..." />
-  <i class="fa-solid fa-circle-arrow-right"></i>`;
-  sliderContainer?.appendChild(slider);
-};
-
-// ===== Change Slider Img ======
-let imgNo = 0;
-getElem("loader").style.display = "block";
-setTimeout(() => {
-  getElem("loader").style.display = "none";
-}, 5000);
-setInterval(() => {
-  imgNo++;
-  if (imgNo < getLocal().length) {
-    console.log(imgNo);
-    showSlider(imgNo);
-  } else {
-    imgNo = 0;
-    showSlider(imgNo);
-  }
-}, 5000);
 
 // ======= Ready Handler ========
 getElem("readyBtn")?.addEventListener("click", () => {
@@ -72,15 +50,50 @@ getElem("readyBtn")?.addEventListener("click", () => {
   setLocal(arr);
 });
 
-// ======= Clear Input Handler ======
-const clearInput = (event) => {
-  event.target.parentNode.firstElementChild.value = "";
-};
-
-// ======= Clear Input Handler ======
-const deleteInput = (event) => {
-  event.target.parentNode.remove();
-  if (!document.querySelector(".input-url")) {
-    getElem("readyBtn").style.display = "none";
+// ======= Show Slider ======
+const showSlider = (imgId) => {
+  getElem("slider")?.remove();
+  const imgArr = getLocal();
+  let rexArr = imgArr[imgId];
+  let rex = isURL(rexArr);
+  console.log(rex);
+  if (rex == false) {
+    swal(
+      `Url of Image Number ${++imgId} is Invalid! \n Please "Go Back Home" \n and Input a Valid Image Url`
+    );
+  } else {
+    const sliderContainer = getElem("slider-container");
+    const slider = document.createElement("div");
+    slider.setAttribute("id", "slider");
+    slider.innerHTML = `
+  <i class="fa-solid fa-circle-arrow-left"></i>
+  <img id="img-slide" src="${imgArr[imgId]}" alt="Image Number ${imgId} is Loading..." />
+  <i class="fa-solid fa-circle-arrow-right"></i>`;
+    sliderContainer?.appendChild(slider);
   }
 };
+
+// ===== Change Slider Img ======
+let imgNo = 0;
+getElem("loader").style.display = "block";
+setTimeout(() => {
+  getElem("loader").style.display = "none";
+}, 5000);
+setInterval(() => {
+  imgNo++;
+  if (imgNo < getLocal().length) {
+    showSlider(imgNo);
+  } else {
+    imgNo = 0;
+    showSlider(imgNo);
+  }
+}, 5000);
+
+// ===== regExp ====
+function isURL(str) {
+  let regex =
+    /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
+  let pattern = new RegExp(regex);
+  return pattern.test(str);
+}
+// ===== regExp ====

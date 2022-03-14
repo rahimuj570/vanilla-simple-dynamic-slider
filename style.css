@@ -91,7 +91,6 @@ header h1 {
   background: rgb(22, 139, 22);
 }
 .buttons :nth-child(2) {
-  display: none;
   color: #fff;
   background: rgb(22, 162, 255);
 }
@@ -138,10 +137,12 @@ header h1 {
 }
 #loader {
   margin: 0 auto;
-  display: inline-block;
   position: absolute;
   left: 0;
   right: 0;
   top: 50vh;
   display: none;
+}
+.default-three {
+  right: 0 !important;
 }
